@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/manh190502/nodejs#readme",
   "dependencies": {
+    "backend-js": "file:",
     "dotenv": "16.4.5",
     "ejs": "3.1.10",
     "express": "4.20.0",
+    "mysql2": "3.11.2",
     "nodemon": "3.1.4"
   }
 }
