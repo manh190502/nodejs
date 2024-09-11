@@ -1,0 +1,29 @@
+{
+  "name": "backend-js",
+  "version": "1.0.0",
+  "description": "ManhJ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manh190502/nodejs.git"
+  },
+  "keywords": [
+    "MJ"
+  ],
+  "author": "MaengJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manh190502/nodejs/issues"
+  },
+  "homepage": "https://github.com/manh190502/nodejs#readme",
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "ejs": "3.1.10",
+    "express": "4.20.0",
+    "nodemon": "3.1.4"
+  }
+}
