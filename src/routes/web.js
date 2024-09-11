@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { getHomepage, getEjs } = require("../controllers/homeController");
+const { get } = require("https");
 
-router.get("/", (req, res) => {
-  res.send("hello");
-});
-
-router.get("/ejs", (req, res) => {
-  res.render("sample");
-});
+// router.method('/route', handler)
+router.get("/", getHomepage);
+router.get("/ejs", getEjs);
 
 module.exports = router;
