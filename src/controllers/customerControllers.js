@@ -5,6 +5,7 @@ const {
   getAllCustomers,
   updateCustomersService,
   deleteCustomerService,
+  deleteArrayCustomersService,
 } = require("../services/customerService");
 
 const createCustomersAPI = async (req, res) => {
@@ -74,10 +75,20 @@ const deleteCustomerAPI = async (req, res) => {
   });
 };
 
+const deleteArrayCustomersAPI = async (req, res) => {
+  let result = await deleteArrayCustomersService(req.body.customersId);
+
+  return res.status(200).json({
+    EC: 0,
+    data: result,
+  });
+};
+
 module.exports = {
   createCustomersAPI,
   createArrayCustomersAPI,
   getCustomersAPI,
   updateCustomersAPI,
   deleteCustomerAPI,
+  deleteArrayCustomersAPI,
 };

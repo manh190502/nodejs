@@ -13,6 +13,7 @@ const {
   getCustomersAPI,
   updateCustomersAPI,
   deleteCustomerAPI,
+  deleteArrayCustomersAPI,
 } = require("../controllers/customerControllers");
 const routerAPI = express.Router();
 
@@ -29,5 +30,6 @@ routerAPI.post("/customers-many", createArrayCustomersAPI);
 routerAPI.get("/customers", getCustomersAPI);
 routerAPI.put("/customers", updateCustomersAPI);
 routerAPI.delete("/customers", deleteCustomerAPI);
+routerAPI.delete("/customers-many", deleteArrayCustomersAPI);
 
 module.exports = routerAPI;
