@@ -28,4 +28,36 @@ const createArrayCustomerService = async (arr) => {
   }
 };
 
-module.exports = { createCustomerService, createArrayCustomerService };
+const getAllCustomers = async () => {
+  try {
+    let result = await Customer.find({});
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+const updateCustomersService = async (customer) => {
+  let result = await Customer.updateOne(
+    { _id: customer.id },
+    {
+      name: customer.name,
+      address: customer.address,
+      email: customer.email,
+    }
+  );
+  return result;
+};
+
+const deleteCustomerService = async (customer) => {
+  let result = await Customer.deleteById(customer.id);
+  return result;
+};
+module.exports = {
+  createCustomerService,
+  createArrayCustomerService,
+  getAllCustomers,
+  updateCustomersService,
+  deleteCustomerService,
+};

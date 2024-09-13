@@ -2,6 +2,9 @@ const { uploadSingleFile } = require("../services/fileService");
 const {
   createCustomerService,
   createArrayCustomerService,
+  getAllCustomers,
+  updateCustomersService,
+  deleteCustomerService,
 } = require("../services/customerService");
 
 const createCustomersAPI = async (req, res) => {
@@ -45,4 +48,36 @@ const createArrayCustomersAPI = async (req, res) => {
   }
 };
 
-module.exports = { createCustomersAPI, createArrayCustomersAPI };
+const getCustomersAPI = async (req, res) => {
+  let customers = await getAllCustomers();
+
+  return res.status(200).json({
+    EC: 0,
+    data: customers,
+  });
+};
+
+const updateCustomersAPI = async (req, res) => {
+  let result = await updateCustomersService(req.body);
+  return res.status(200).json({
+    EC: 0,
+    data: result,
+  });
+};
+
+const deleteCustomerAPI = async (req, res) => {
+  let result = await deleteCustomerService(req.body);
+
+  return res.status(200).json({
+    EC: 0,
+    data: result,
+  });
+};
+
+module.exports = {
+  createCustomersAPI,
+  createArrayCustomersAPI,
+  getCustomersAPI,
+  updateCustomersAPI,
+  deleteCustomerAPI,
+};
