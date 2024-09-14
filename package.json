@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/manh190502/nodejs#readme",
   "dependencies": {
+    "api-query-params": "5.4.0",
     "backend-js": "file:",
     "dotenv": "16.4.5",
     "ejs": "3.1.10",

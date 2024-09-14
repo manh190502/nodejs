@@ -52,9 +52,11 @@ const createArrayCustomersAPI = async (req, res) => {
 const getCustomersAPI = async (req, res) => {
   let limit = req.query.limit;
   let page = req.query.page;
+  let name = req.query.name;
   let customers = "";
+
   if (limit && page) {
-    customers = await getAllCustomersService(limit, page);
+    customers = await getAllCustomersService(limit, page, name, req.query);
   } else {
     customers = await getAllCustomersService();
   }
