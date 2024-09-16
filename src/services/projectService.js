@@ -3,22 +3,84 @@ const aqp = require("api-query-params");
 
 const createProjectService = async (projectData) => {
   try {
-    let result = await Project.create({
-      name: projectData.name,
-      startDate: projectData.startDate,
-      endDate: projectData.endDate,
-      description: projectData.description,
-      customerInfor: projectData.customerInfor,
-      userInfor: projectData.userInfor,
-      leader: projectData.leader,
-      tasks: projectData.tasks,
-    });
+    if (projectData.type === "EMPTY-PROJECT") {
+      let result = await Project.create(projectData);
 
-    return result;
+      return result;
+    }
+
+    if (projectData.type === "ADD-USERS") {
+      let myProject = await Project.findById(projectData.projectId).exec();
+
+      for (let i = 0; i < projectData.usersArr.length; i++) {
+        myProject.userInfor.push(projectData.usersArr[i]);
+      }
+
+      let newResult = await myProject.save();
+
+      return newResult;
+    }
+
+    if (projectData.type === "REMOVE-USERS") {
+      let myProject = await Project.findById(projectData.projectId).exec();
+
+      for (let i = 0; i < projectData.usersArr.length; i++) {
+        myProject.userInfor.pull(projectData.usersArr[i]);
+      }
+
+      let newResult = await myProject.save();
+
+      return newResult;
+    }
+    return null;
   } catch (error) {
     console.log(error);
     return null;
   }
 };
 
-module.exports = { createProjectService };
+const getAllProjectService = async (queryString) => {
+  const page = queryString.page;
+  const { filter, limit, population } = aqp(queryString);
+
+  delete filter.page;
+
+  let offset = (page - 1) * limit;
+
+  let result = await Project.find(filter)
+    .populate(population)
+    .skip(offset)
+    .limit(limit)
+    .exec();
+
+  // console.log(filter);
+  // let result = await Project.find({});
+
+  return result;
+};
+
+const deleteProjectService = async (id) => {
+  let result = await Project.deleteById(id);
+
+  return result;
+};
+
+const updateProjectService = async (projectData) => {
+  let project = await Project.updateOne(
+    { _id: projectData.id },
+    {
+      name: projectData.name,
+      endDate: projectData.endDate,
+      description: projectData.description,
+    }
+  );
+
+  return project;
+};
+
+module.exports = {
+  createProjectService,
+  getAllProjectService,
+  deleteProjectService,
+  updateProjectService,
+};
