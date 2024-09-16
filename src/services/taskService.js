@@ -1,3 +1,4 @@
+const Project = require("../models/project");
 const Task = require("../models/task");
 const aqp = require("api-query-params");
 
@@ -19,23 +20,22 @@ const createTaskService = async (taskData) => {
 const getAllTaskService = async (queryString) => {
   const page = queryString.page;
 
-  const { filter, limit } = aqp(queryString);
+  const { filter, limit, population } = aqp(queryString);
   delete filter.page;
 
   let offset = (page - 1) * limit;
 
-  let result = await Task.find(filter).skip(offset).limit(limit).exec();
+  let result = await Task.find(filter)
+    .populate(population)
+    .skip(offset)
+    .limit(limit)
+    .exec();
 
   return result;
 };
 
 const updateTaskService = async (taskData) => {
-  let result = await Task.updateOne(
-    { _id: taskData.id },
-    {
-      ...taskData,
-    }
-  );
+  let result = await Task.updateOne({ _id: taskData.id }, { ...taskData });
 
   return result;
 };

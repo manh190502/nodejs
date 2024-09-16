@@ -1,4 +1,5 @@
 const { uploadSingleFile } = require("../services/fileService");
+const Joi = require("joi");
 const {
   createCustomerService,
   createArrayCustomerService,
@@ -10,6 +11,24 @@ const {
 
 const createCustomersAPI = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
+
+  // const schema = Joi.object({
+  //   name: Joi.string().min(3).max(3).required(),
+  //   address: Joi.string(),
+  //   phone: Joi.string().pattern(new RegExp("^[0-9]{8,11}$")),
+  //   email: Joi.string().email(),
+  //   description: Joi.string(),
+  // });
+
+  // const { error } = schema.validate(req.body);
+
+  // console.log(error);
+
+  // if (error) {
+  //   return error;
+  // } else {
+  //   //
+  // }
   let imgUrl = "";
 
   if (!req.files || Object.keys(req.files).length === 0) {

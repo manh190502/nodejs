@@ -24,8 +24,8 @@ const taskSchema = new mongoose.Schema(
     status: String,
     startDate: String,
     endDate: String,
-    usersInfo: userSchema,
-    projectInfo: projectSchema,
+    usersInfor: userSchema,
+    projectInfor: projectSchema,
   },
   {
     timestamps: true,
