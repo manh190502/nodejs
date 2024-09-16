@@ -22,6 +22,13 @@ const {
   deleteProjectAPI,
   updateProjectAPI,
 } = require("../controllers/projectControllers");
+
+const {
+  createTaskAPI,
+  getAllTaskAPI,
+  updateTaskAPI,
+  deleteTaskAPI,
+} = require("../controllers/taskControllers");
 const routerAPI = express.Router();
 
 routerAPI.get("/users", getUsersAPI);
@@ -43,5 +50,10 @@ routerAPI.post("/projects", createProjectAPI);
 routerAPI.get("/projects", getAllProjectAPI);
 routerAPI.delete("/projects", deleteProjectAPI);
 routerAPI.put("/projects", updateProjectAPI);
+
+routerAPI.post("/tasks", createTaskAPI);
+routerAPI.get("/tasks", getAllTaskAPI);
+routerAPI.put("/tasks", updateTaskAPI);
+routerAPI.delete("/tasks", deleteTaskAPI);
 
 module.exports = routerAPI;

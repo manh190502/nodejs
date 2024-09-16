@@ -68,11 +68,7 @@ const deleteProjectService = async (id) => {
 const updateProjectService = async (projectData) => {
   let project = await Project.updateOne(
     { _id: projectData.id },
-    {
-      name: projectData.name,
-      endDate: projectData.endDate,
-      description: projectData.description,
-    }
+    { ...projectData }
   );
 
   return project;
